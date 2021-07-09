@@ -26,7 +26,7 @@ time = input('start-day month1: ')
 path = input("Path to CSV of the FIRST Month: ")
 data = pd.DataFrame(read_csv(path))
 data['Energy stop (wh)'] = data['Energy stop (wh)'].astype('int64')
-data = data[data['Start timetamp'].astype('str') > time]
+data = data[data['Start timestamp'].astype('str') > time]
 # Selecting the last row of every 'CP communication unit' in month 1
 month1 = data.groupby(['CP communication unit'], axis=0, as_index=False)["Energy stop (wh)"].max()
 
@@ -35,7 +35,7 @@ time = input('start-day month2: ')
 path = input("Path to CSV of the SECOND Month: ")
 data = pd.DataFrame(read_csv(path))
 data['Energy initial (wh)'] = data['Energy initial (wh)'].astype('int64')
-data = data[data['Start timetamp'].astype('str') > time]
+data = data[data['Start timestamp'].astype('str') > time]
 # Selecting the last row of every 'CP communication unit' in month 2
 month2 = data.groupby(['CP communication unit'], axis=0, as_index=False)["Energy initial (wh)"].min()
 
