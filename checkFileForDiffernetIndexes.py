@@ -32,7 +32,7 @@ def read_csv(path):
 # converts excel .xlsx file into a pandas.Dataframe
 # Syntax e.g. 2021-06-01 00:00:00+02:00
 time = input('start-day: ')
-data = pd.DataFrame(read_csv(input("Path to CSV of Month: ")))
+data = cleanNull(pd.DataFrame(read_csv(input("Path to CSV of Month: "))))
 data['Energy stop (wh)'] = data['Energy stop (wh)'].astype('int64')
 data['Energy initial (wh)'] = data['Energy initial (wh)'].astype('int64')
 data['Energy consumed (wh)'] = data['Energy consumed (wh)'].astype('int64')
