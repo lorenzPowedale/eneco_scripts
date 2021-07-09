@@ -1,10 +1,15 @@
 # pip install openpyxl, pandas, unicodecsv
+
+# days for July
+# 2021-06-01 00:00:00+02:00
+# 2021-06-30 23:59:59+02:00
+
 import pandas as pd
 import unicodecsv
 import sys
-import math
 
-output = ['CP communication unit', 'Energy stop (wh)', 'Energy initial (wh)', 'Csid', 'Start timestamp', 'End timestamp']
+output = ['CP communication unit', 'Energy stop (wh)', 'Energy initial (wh)', 'Csid', 'Start timestamp',
+          'End timestamp']
 
 
 # cleanses all 0s, NaNs and Nulls out of the DataFrame
@@ -31,7 +36,7 @@ data = pd.DataFrame(read_csv(input("Path to CSV of Month: ")))
 data['Energy stop (wh)'] = data['Energy stop (wh)'].astype('int64')
 data['Energy initial (wh)'] = data['Energy initial (wh)'].astype('int64')
 data['Energy consumed (wh)'] = data['Energy consumed (wh)'].astype('int64')
-data = data[data['Start timestamp'].astype('str') >= time]
+data = data[(data['End timestamp'].astype('str') >= time)]
 # Grouping every 'CP communication unit' in month
 grouped_df = data.groupby(['CP communication unit'], axis=0, as_index=False)
 
@@ -47,5 +52,4 @@ for key, item in grouped_df:
     data_copy = data_copy.append(group)
 data_copy = data_copy[data_copy['Energy initial (wh)'].notnull()]
 data_copy.to_excel("wrong_Indexes.xlsx", index=False)
-print("Finished")
 sys.exit(0)
